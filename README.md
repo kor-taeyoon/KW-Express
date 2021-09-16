@@ -3,4 +3,7 @@
 2021 MY capstone을 위한 레포지토리.
 
 
-![Diagram](doc/System.drawio.svg)
+<!-- ![Diagram](doc/System.drawio.svg) -->
+
+
+물류시스템 최적화를 위한 도심형 무인 운송 로봇
