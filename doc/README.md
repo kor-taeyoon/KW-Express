@@ -1,9 +1,9 @@
 # Diagram Preview
 
 
-## Manual Controlling System
+### Manual Controlling System
 
-![Diagram1](System_autonomous.drawio.svg)
+![Diagram1](System_manual.drawio.svg)
 
 <br>
 <br>
@@ -11,4 +11,4 @@
 
 ## Autonomous Driving System
 
-![Diagram2](System_manual.drawio.svg)
+![Diagram2](System_autonomous.drawio.svg)
