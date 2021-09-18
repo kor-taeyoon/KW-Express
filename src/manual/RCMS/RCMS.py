@@ -51,7 +51,7 @@ pygame.init()
 
 
 # Display Initialize
-screen = pygame.display.set_mode((300,300)) # WIDTH, HEIGHT
+screen = pygame.display.set_mode((925,510)) # WIDTH, HEIGHT
 pygame.display.set_caption("KW-Express")
 clock = pygame.time.Clock()
 run = True
