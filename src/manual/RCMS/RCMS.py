@@ -1,23 +1,34 @@
 # Module import
+import time
 import serial
 import pygame
 pygame.init()
 
 
-# Serial Connection test
+# Serial Connection
 # ========================================
 try:
-    ser = serial.Serial("/dev/opencr", 9600, timeout=1)
+    ser_opencr = serial.Serial("/dev/opencr", 9600, timeout=1)
     print('OpenCR UART Connection Established!')
 except:
     print('OpenCR UART Connection Error Occured.')
+    exit()
+
+try:
+    ser_barcode = serial.Serial("/dev/barcode_reader", 115200, timeout=0.001)
+    print('BarCode Reader UART Connection Established!')
+except:
+    print('BarCode Reader UART Connection Error Occured.')
+    exit()
+
+data_barcode = ""
+time_last_barcode = time.time()
 
 
 
 
 # PyGame GUI Start
 # ========================================
-
 # Define
 WIN_WIDTH = 925
 WIN_HEIGHT = 510
@@ -26,13 +37,11 @@ STEP_MAX_SPEED = 10000
 STEP_ACCEL = 20000
 STEP_ACCEL_FRAME = STEP_ACCEL/FPS
 
-
 # Display Initialize
 screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT)) # WIDTH, HEIGHT
 pygame.display.set_caption("KW-Express")
 clock = pygame.time.Clock()
 run = True
-
 
 # Object Drawing Function
 def DrawSquare(center_x, center_y, size, fill):
@@ -40,7 +49,6 @@ def DrawSquare(center_x, center_y, size, fill):
         pygame.draw.rect(screen, (0,0,0), (center_x-(size/2), center_y-(size/2),size, size), 0)
     else:
         pygame.draw.rect(screen, (0,0,0), (center_x-(size/2), center_y-(size/2),size, size), fill)    
-
 
 # Object Initialize
 flag_stop = 1
@@ -59,18 +67,32 @@ txt_velo_left = myFont.render(str(velo_left), True, (0,0,0))
 
 
 # Main Loop Start
+# ========================================
 while run:
+    # Barcode Data process
+    if ser_barcode.readable():
+        res = ser_barcode.read()
+        if res != b'':
+            res += ser_barcode.readline()
+            data_barcode = "BarCode Data : " + res.decode()[:len(res)-1]
+            time_last_barcode = time.time()
+    if time.time() - time_last_barcode > 2:
+        data_barcode = ""
+    
+    # Controlling Box Drawing
     screen.fill((150,150,150))
     stop = DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2, 60, 3)
     forward = DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2-100, 80, 3)
     backward = DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2+100, 80, 3)
     lefttrun = DrawSquare(WIN_WIDTH/2-100, WIN_HEIGHT/2, 80, 3)
     righttrun = DrawSquare(WIN_WIDTH/2+100, WIN_HEIGHT/2, 80, 3)
+    
     # Keyboard Event Process
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            ser.close()
+            ser_opencr.close()
+            ser_barcode.close()
             pygame.quit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
@@ -80,25 +102,25 @@ while run:
                 flag_forward = 1
                 flag_left = 1
                 flag_right = 1
-                ser.write("w".encode())
+                ser_opencr.write("w".encode())
             if event.key == pygame.K_x:
                 flag_stop = 0
                 flag_backward = 1
                 flag_left = -1
                 flag_right = -1
-                ser.write("x".encode())
+                ser_opencr.write("x".encode())
             if event.key == pygame.K_a:
                 flag_stop = 0
                 flag_leftturn = 1
                 flag_left = -1
                 flag_right = 1
-                ser.write("a".encode())
+                ser_opencr.write("a".encode())
             if event.key == pygame.K_d:
                 flag_stop = 0
                 flag_rightturn = 1
                 flag_left = 1
                 flag_right = -1
-                ser.write("d".encode())
+                ser_opencr.write("d".encode())
         if event.type == pygame.KEYUP:
             if (event.key == pygame.K_w) or (event.key == pygame.K_x) or (event.key == pygame.K_a) or (event.key == pygame.K_d):
                 flag_stop = 1
@@ -108,7 +130,7 @@ while run:
                 flag_rightturn = 0
                 flag_left = 0
                 flag_right = 0
-                ser.write("s".encode())
+                ser_opencr.write("s".encode())
 
     # Wheel Step Per Sec Calculator
     if flag_left == 1:    # Accel On
@@ -138,11 +160,15 @@ while run:
             if velo_right <= 0-STEP_ACCEL_FRAME:
                 velo_right+=STEP_ACCEL_FRAME
     
+    # Velocity Data Update
     txt_velo_left = myFont.render(str(int(velo_left))+" step/s", True, (0,0,0))
     screen.blit(txt_velo_left, [WIN_WIDTH/2 - 250, WIN_HEIGHT/2 - 200])
     txt_velo_right = myFont.render(str(int(velo_right))+" step/s", True, (0,0,0))
     screen.blit(txt_velo_right, [WIN_WIDTH/2 + 200, WIN_HEIGHT/2 - 200])
+    txt_barcode = myFont.render(data_barcode, True, (0,0,0))
+    screen.blit(txt_barcode, [30, WIN_HEIGHT-50])
 
+    # Normal Text Data Update
     txt_tmp = myFont.render("W", True, (0,0,0))
     screen.blit(txt_tmp, [WIN_WIDTH/2-14, WIN_HEIGHT/2 - 110])
     txt_tmp = myFont.render("X", True, (0,0,0))
@@ -154,7 +180,7 @@ while run:
     txt_tmp = myFont.render("S", True, (0,0,0))
     screen.blit(txt_tmp, [WIN_WIDTH/2-10, WIN_HEIGHT/2-10])
 
-
+    # Controlling Square Drawing
     if flag_stop:
         DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2, 60, 0)
     if flag_forward:
