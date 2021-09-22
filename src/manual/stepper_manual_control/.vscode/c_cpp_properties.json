@@ -1,0 +1,111 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/include",
+                "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/OpenAMP",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/hid",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/cdc",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F7xx_HAL_Driver/Inc",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F7xx_HAL_Driver/Src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/STM32F7xx",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/open-amp/lib/include",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/libmetal/lib/include",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/virtual_driver",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-cmsis/CMSIS/Core/Include",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F7xx/Include",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F7xx/Source/Templates/gcc",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-cmsis/CMSIS/DSP/Include",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/variants/NUCLEO_F767ZI",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/CMSIS_DSP/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/EEPROM/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Keyboard/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Mouse/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/SPI/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/SrcWrapper/src",
+                "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Wire/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/include",
+                    "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/OpenAMP",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/hid",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/cdc",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F7xx_HAL_Driver/Inc",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F7xx_HAL_Driver/Src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/STM32F7xx",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/open-amp/lib/include",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/libmetal/lib/include",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/virtual_driver",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-cmsis/CMSIS/Core/Include",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F7xx/Include",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F7xx/Source/Templates/gcc",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-cmsis/CMSIS/DSP/Include",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/variants/NUCLEO_F767ZI",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/CMSIS_DSP/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/EEPROM/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Keyboard/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Mouse/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/SPI/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/SrcWrapper/src",
+                    "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/libraries/Wire/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=50200",
+                "STM32F767xx",
+                "STM32F7xx",
+                "ARDUINO=10808",
+                "ARDUINO_ARCH_STM32",
+                "ARDUINO_NUCLEO_F767ZI",
+                "BOARD_NAME=\"NUCLEO_F767ZI\"",
+                "HAL_UART_MODULE_ENABLED",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "compilerPath": "C:/Users/kimtaeyoon/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mfpu=fpv4-sp-d16",
+                "-mfloat-abi=hard",
+                "-mcpu=cortex-m7",
+                "-mthumb",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
