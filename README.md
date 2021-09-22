@@ -14,7 +14,11 @@
 
 물류 유통 시스템의 효율을 높이기 위해 아파트 단지 내부에서의 택배 운송을 모두 자동화하는 로봇 및 제어 시스템.
 
-<div style="text-align: right"> KW-특송 </div>
+<div align="right">
+KW-특송
+</div>
+
+
 <div style="text-align: right"> 김태윤, 김지원, 이지원, 정세훈(전자통신공학과) </div>
 
 
