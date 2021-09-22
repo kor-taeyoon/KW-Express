@@ -17,16 +17,12 @@
 <div align="right">
 KW-특송
 </div>
-
-
-<div style="text-align: right"> 김태윤, 김지원, 이지원, 정세훈(전자통신공학과) </div>
-
-
-
-<div style="text-align: right">  
+<div align="right">
+김태윤, 김지원, 이지원, 정세훈(전자통신공학과)
+</div>
+<div align="right">
 지도교수: 채주형&nbsp;&nbsp;&nbsp;&nbsp;산업체: 김성용 (에스오엑스 대표)
 </div>
-
 <br>
 
 - - -
