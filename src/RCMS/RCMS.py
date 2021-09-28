@@ -7,11 +7,19 @@ pygame.init()
 
 # Serial Connection
 # ========================================
+
 try:
-    ser_opencr = serial.Serial("/dev/opencr", 9600, timeout=1)
-    print('OpenCR UART Connection Established!')
+    ser_nucleo = serial.Serial("/dev/Nucleo-F103RB", 9600, timeout=1)
+    print('Nucleo-F103RB UART Connection Established!')
 except:
-    print('OpenCR UART Connection Error Occured.')
+    print('Nucleo-F103RB UART Connection Error Occured.')
+    exit()
+
+try:
+    ser_ramps = serial.Serial("/dev/RAMPS", 9600, timeout=1)
+    print('RAMPS UART Connection Established!')
+except:
+    print('RAMPS UART Connection Error Occured.')
     exit()
 
 try:
@@ -21,10 +29,12 @@ except:
     print('BarCode Reader UART Connection Error Occured.')
     exit()
 
+
 data_barcode = ""
 time_last_barcode = time.time()
 
 
+time.sleep(1)
 
 
 # PyGame GUI Start
@@ -75,6 +85,7 @@ while run:
         if res != b'':
             res += ser_barcode.readline()
             data_barcode = "BarCode Data : " + res.decode()[:len(res)-1]
+            ser_nucleo.write(data_barcode.encode())
             time_last_barcode = time.time()
     if time.time() - time_last_barcode > 2:
         data_barcode = ""
@@ -91,7 +102,8 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            ser_opencr.close()
+            ser_nucleo.close()
+            ser_ramps.close()
             ser_barcode.close()
             pygame.quit()
         if event.type == pygame.KEYDOWN:
@@ -102,25 +114,25 @@ while run:
                 flag_forward = 1
                 flag_left = 1
                 flag_right = 1
-                ser_opencr.write("w".encode())
+                ser_nucleo.write("w".encode())
             if event.key == pygame.K_x:
                 flag_stop = 0
                 flag_backward = 1
                 flag_left = -1
                 flag_right = -1
-                ser_opencr.write("x".encode())
+                ser_nucleo.write("x".encode())
             if event.key == pygame.K_a:
                 flag_stop = 0
                 flag_leftturn = 1
                 flag_left = -1
                 flag_right = 1
-                ser_opencr.write("a".encode())
+                ser_nucleo.write("a".encode())
             if event.key == pygame.K_d:
                 flag_stop = 0
                 flag_rightturn = 1
                 flag_left = 1
                 flag_right = -1
-                ser_opencr.write("d".encode())
+                ser_nucleo.write("d".encode())
         if event.type == pygame.KEYUP:
             if (event.key == pygame.K_w) or (event.key == pygame.K_x) or (event.key == pygame.K_a) or (event.key == pygame.K_d):
                 flag_stop = 1
@@ -130,7 +142,7 @@ while run:
                 flag_rightturn = 0
                 flag_left = 0
                 flag_right = 0
-                ser_opencr.write("s".encode())
+                ser_nucleo.write("s".encode())
 
     # Wheel Step Per Sec Calculator
     if flag_left == 1:    # Accel On
