@@ -49,9 +49,24 @@ STEP_MAX_SPEED = 10000
 STEP_ACCEL = 20000
 STEP_ACCEL_FRAME = STEP_ACCEL/FPS
 
-# Global Variables
+# Global Variables & Objects
 data_barcode = ""
 time_last_barcode = time.time()
+flag_stop = 1
+flag_forward = 0
+flag_backward = 0
+flag_leftturn = 0
+flag_rightturn = 0
+flag_left = 0
+flag_right = 0
+flag_window = 0
+flag_gori_1 = 1
+flag_gori_2 = 1
+flag_gori_3 = 1
+velo_left = 0
+velo_right = 0
+myFont = pygame.font.SysFont("arial", 30, True, False)
+txt_velo_left = myFont.render(str(velo_left), True, (0,0,0))
 
 # Display Initialize
 screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT)) # WIDTH, HEIGHT
@@ -66,18 +81,14 @@ def DrawSquare(center_x, center_y, size, fill):
     else:
         pygame.draw.rect(screen, (0,0,0), (center_x-(size/2), center_y-(size/2),size, size), fill)    
 
-# Object Initialize
-flag_stop = 1
-flag_forward = 0
-flag_backward = 0
-flag_leftturn = 0
-flag_rightturn = 0
-flag_left = 0
-flag_right = 0
-velo_left = 0
-velo_right = 0
-myFont = pygame.font.SysFont("arial", 30, True, False)
-txt_velo_left = myFont.render(str(velo_left), True, (0,0,0))
+def DrawCircle(center_x, center_y, size, fill):
+    if fill == 0:
+        pygame.draw.circle(screen, (0,0,0), (center_x-(size/2), center_y-(size/2)), size, 0)
+    else:
+        pygame.draw.circle(screen, (0,0,0), (center_x-(size/2), center_y-(size/2)), size, fill)
+    
+
+
 
 
 
@@ -95,14 +106,9 @@ while run:
             time_last_barcode = time.time()
     if time.time() - time_last_barcode > 2:
         data_barcode = ""
+    txt_barcode = myFont.render(data_barcode, True, (0,0,0))
     
-    # Controlling Box Drawing
-    screen.fill((150,150,150))
-    stop = DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2, 60, 3)
-    forward = DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2-100, 80, 3)
-    backward = DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2+100, 80, 3)
-    lefttrun = DrawSquare(WIN_WIDTH/2-100, WIN_HEIGHT/2, 80, 3)
-    righttrun = DrawSquare(WIN_WIDTH/2+100, WIN_HEIGHT/2, 80, 3)
+    
     
     # Keyboard Event Process
     for event in pygame.event.get():
@@ -142,20 +148,28 @@ while run:
 
             if event.key == pygame.K_r:     # 창문 열기
                 ser_ramps.write("r".encode())
+                flag_window = 1
             if event.key == pygame.K_f:     # 창문 닫기
                 ser_ramps.write("f".encode())
-            if event.key == pygame.K_t:     # 1번 고리 낙하
+                flag_window = 0
+            if event.key == pygame.K_t:     # 1번 고리 복귀
                 ser_ramps.write("t".encode())
-            if event.key == pygame.K_g:     # 1번 고리 복귀
+                flag_gori_1 = 1
+            if event.key == pygame.K_g:     # 1번 고리 낙하
                 ser_ramps.write("g".encode())
-            if event.key == pygame.K_y:     # 2번 고리 낙하
+                flag_gori_1 = 0
+            if event.key == pygame.K_y:     # 2번 고리 복귀
                 ser_ramps.write("y".encode())
-            if event.key == pygame.K_h:     # 2번 고리 복귀
+                flag_gori_2 = 1
+            if event.key == pygame.K_h:     # 2번 고리 낙하
                 ser_ramps.write("h".encode())
-            if event.key == pygame.K_u:     # 3번 고리 낙하
+                flag_gori_2 = 0
+            if event.key == pygame.K_u:     # 3번 고리 복귀
                 ser_ramps.write("u".encode())
-            if event.key == pygame.K_j:     # 3번 고리 복귀
+                flag_gori_3 = 1
+            if event.key == pygame.K_j:     # 3번 고리 낙하
                 ser_ramps.write("h".encode())
+                flag_gori_3 = 0
 
         if event.type == pygame.KEYUP:
             if (event.key == pygame.K_w) or (event.key == pygame.K_x) or (event.key == pygame.K_a) or (event.key == pygame.K_d):
@@ -195,28 +209,28 @@ while run:
         elif velo_right < 0:
             if velo_right <= 0-STEP_ACCEL_FRAME:
                 velo_right+=STEP_ACCEL_FRAME
-    
-    # Velocity Data Update
     txt_velo_left = myFont.render(str(int(velo_left))+" step/s", True, (0,0,0))
-    screen.blit(txt_velo_left, [WIN_WIDTH/2 - 250, WIN_HEIGHT/2 - 200])
     txt_velo_right = myFont.render(str(int(velo_right))+" step/s", True, (0,0,0))
-    screen.blit(txt_velo_right, [WIN_WIDTH/2 + 200, WIN_HEIGHT/2 - 200])
-    txt_barcode = myFont.render(data_barcode, True, (0,0,0))
-    screen.blit(txt_barcode, [30, WIN_HEIGHT-50])
+    
+    # GUI Drawing
+    # ========================================
+    # Controlling Box Drawing
+    screen.fill((150,150,150))
+    DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2, 60, 3)        # S
+    DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2-100, 80, 5)    # W
+    DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2+100, 80, 5)    # X
+    DrawSquare(WIN_WIDTH/2-100, WIN_HEIGHT/2, 80, 5)    # A
+    DrawSquare(WIN_WIDTH/2+100, WIN_HEIGHT/2, 80, 5)    # D
+    DrawCircle(WIN_WIDTH-250, WIN_HEIGHT-100, 20, 4)    # F # 창문 올리기
+    DrawCircle(WIN_WIDTH-250, WIN_HEIGHT-50, 20, 4)     # R # 창문 내리기
+    DrawCircle(WIN_WIDTH-150, WIN_HEIGHT-100, 20, 4)    # G # 1번 고리 복귀
+    DrawCircle(WIN_WIDTH-150, WIN_HEIGHT-50, 20, 4)     # T # 1번 고리 낙하
+    DrawCircle(WIN_WIDTH-100, WIN_HEIGHT-100, 20, 4)    # H # 2번 고리 복귀
+    DrawCircle(WIN_WIDTH-100, WIN_HEIGHT-50, 20, 4)     # Y # 2번 고리 낙하
+    DrawCircle(WIN_WIDTH-50, WIN_HEIGHT-100, 20, 4)     # J # 3번 고리 복귀
+    DrawCircle(WIN_WIDTH-50, WIN_HEIGHT-50, 20, 4)      # U # 3번 고리 낙하
 
-    # Normal Text Data Update
-    txt_tmp = myFont.render("W", True, (0,0,0))
-    screen.blit(txt_tmp, [WIN_WIDTH/2-14, WIN_HEIGHT/2 - 110])
-    txt_tmp = myFont.render("X", True, (0,0,0))
-    screen.blit(txt_tmp, [WIN_WIDTH/2-10, WIN_HEIGHT/2 + 90])
-    txt_tmp = myFont.render("A", True, (0,0,0))
-    screen.blit(txt_tmp, [WIN_WIDTH/2 - 110, WIN_HEIGHT/2-10])
-    txt_tmp = myFont.render("D", True, (0,0,0))
-    screen.blit(txt_tmp, [WIN_WIDTH/2 + 90, WIN_HEIGHT/2-10])
-    txt_tmp = myFont.render("S", True, (0,0,0))
-    screen.blit(txt_tmp, [WIN_WIDTH/2-10, WIN_HEIGHT/2-10])
-
-    # Controlling Square Drawing
+    # Drawn Square Modifying
     if flag_stop:
         DrawSquare(WIN_WIDTH/2, WIN_HEIGHT/2, 60, 0)
     if flag_forward:
@@ -227,6 +241,38 @@ while run:
         DrawSquare(WIN_WIDTH/2-100, WIN_HEIGHT/2, 80, 0)
     if flag_rightturn:
         DrawSquare(WIN_WIDTH/2+100, WIN_HEIGHT/2, 80, 0)
+
+    if flag_window:
+        DrawCircle(WIN_WIDTH-250, WIN_HEIGHT-100, 20, 0)
+    else:
+        DrawCircle(WIN_WIDTH-250, WIN_HEIGHT-50, 20, 0)
+    if flag_gori_1:
+        DrawCircle(WIN_WIDTH-150, WIN_HEIGHT-100, 20, 0)
+    else:
+        DrawCircle(WIN_WIDTH-150, WIN_HEIGHT-50, 20, 0)
+    if flag_gori_2:
+        DrawCircle(WIN_WIDTH-100, WIN_HEIGHT-100, 20, 0)
+    else:
+        DrawCircle(WIN_WIDTH-100, WIN_HEIGHT-50, 20, 0)
+    if flag_gori_3:
+        DrawCircle(WIN_WIDTH-50, WIN_HEIGHT-100, 20, 0)
+    else:
+        DrawCircle(WIN_WIDTH-50, WIN_HEIGHT-50, 20, 0)
+
+    # Text Data Update
+    screen.blit(txt_velo_left, [WIN_WIDTH/2 - 250, WIN_HEIGHT/2 - 200])
+    screen.blit(txt_velo_right, [WIN_WIDTH/2 + 200, WIN_HEIGHT/2 - 200])
+    screen.blit(txt_barcode, [30, WIN_HEIGHT-50])
+    txt_tmp = myFont.render("W", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH/2-14, WIN_HEIGHT/2 - 110])
+    txt_tmp = myFont.render("X", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH/2-10, WIN_HEIGHT/2 + 90])
+    txt_tmp = myFont.render("A", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH/2 - 110, WIN_HEIGHT/2-10])
+    txt_tmp = myFont.render("D", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH/2 + 90, WIN_HEIGHT/2-10])
+    txt_tmp = myFont.render("S", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH/2-10, WIN_HEIGHT/2-10])
 
     # Refresh & Tick (FPS)
     pygame.display.update()
