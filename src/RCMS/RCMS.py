@@ -5,9 +5,9 @@ import pygame
 pygame.init()
 
 
+
 # Serial Connection
 # ========================================
-
 try:
     ser_nucleo = serial.Serial("/dev/Nucleo-F103RB", 9600, timeout=1)
     print('Nucleo-F103RB UART Connection Established!')
@@ -29,12 +29,14 @@ except:
     print('BarCode Reader UART Connection Error Occured.')
     exit()
 
-
-data_barcode = ""
-time_last_barcode = time.time()
-
-
+print('Launch waiting... 3s')
 time.sleep(1)
+print('Launch waiting... 2s')
+time.sleep(1)
+print('Launch waiting... 1s')
+time.sleep(1)
+print('Launched !')
+
 
 
 # PyGame GUI Start
@@ -46,6 +48,10 @@ FPS = 40
 STEP_MAX_SPEED = 10000
 STEP_ACCEL = 20000
 STEP_ACCEL_FRAME = STEP_ACCEL/FPS
+
+# Global Variables
+data_barcode = ""
+time_last_barcode = time.time()
 
 # Display Initialize
 screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT)) # WIDTH, HEIGHT
@@ -109,30 +115,48 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 run = False
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_w:     # 전진
                 flag_stop = 0
                 flag_forward = 1
                 flag_left = 1
                 flag_right = 1
                 ser_nucleo.write("w".encode())
-            if event.key == pygame.K_x:
+            if event.key == pygame.K_x:     # 후진
                 flag_stop = 0
                 flag_backward = 1
                 flag_left = -1
                 flag_right = -1
                 ser_nucleo.write("x".encode())
-            if event.key == pygame.K_a:
+            if event.key == pygame.K_a:     # 좌회전
                 flag_stop = 0
                 flag_leftturn = 1
                 flag_left = -1
                 flag_right = 1
                 ser_nucleo.write("a".encode())
-            if event.key == pygame.K_d:
+            if event.key == pygame.K_d:     # 우회전
                 flag_stop = 0
                 flag_rightturn = 1
                 flag_left = 1
                 flag_right = -1
                 ser_nucleo.write("d".encode())
+
+            if event.key == pygame.K_r:     # 창문 열기
+                ser_ramps.write("r".encode())
+            if event.key == pygame.K_f:     # 창문 닫기
+                ser_ramps.write("f".encode())
+            if event.key == pygame.K_t:     # 1번 고리 낙하
+                ser_ramps.write("t".encode())
+            if event.key == pygame.K_g:     # 1번 고리 복귀
+                ser_ramps.write("g".encode())
+            if event.key == pygame.K_y:     # 2번 고리 낙하
+                ser_ramps.write("y".encode())
+            if event.key == pygame.K_h:     # 2번 고리 복귀
+                ser_ramps.write("h".encode())
+            if event.key == pygame.K_u:     # 3번 고리 낙하
+                ser_ramps.write("u".encode())
+            if event.key == pygame.K_j:     # 3번 고리 복귀
+                ser_ramps.write("h".encode())
+
         if event.type == pygame.KEYUP:
             if (event.key == pygame.K_w) or (event.key == pygame.K_x) or (event.key == pygame.K_a) or (event.key == pygame.K_d):
                 flag_stop = 1
@@ -207,4 +231,3 @@ while run:
     # Refresh & Tick (FPS)
     pygame.display.update()
     clock.tick(FPS)
-
