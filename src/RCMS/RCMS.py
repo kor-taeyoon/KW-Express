@@ -168,7 +168,7 @@ while run:
                 ser_ramps.write("u".encode())
                 flag_gori_3 = 1
             if event.key == pygame.K_j:     # 3번 고리 낙하
-                ser_ramps.write("h".encode())
+                ser_ramps.write("j".encode())
                 flag_gori_3 = 0
 
         if event.type == pygame.KEYUP:
