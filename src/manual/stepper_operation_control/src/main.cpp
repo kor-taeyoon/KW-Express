@@ -75,12 +75,19 @@ void setup() {
     stepper_g2.setAcceleration(4000);
     stepper_g3.setMaxSpeed(2000);
     stepper_g3.setAcceleration(4000);
+    
+    stepper_wl.setMaxSpeed(1500);
+    stepper_wl.setAcceleration(2000);
+    stepper_wr.setMaxSpeed(1500);
+    stepper_wr.setAcceleration(2000);
 }
 
 void loop() {
     stepper_g1.run();
     stepper_g2.run();
     stepper_g3.run();
+    stepper_wl.run();
+    stepper_wr.run();
     if(Serial.available()){
         char tmp = Serial.read();
         if(tmp == 't'){ // 1번 고리 복귀
@@ -102,8 +109,8 @@ void loop() {
             stepper_g3.moveTo(2400);
         }
         if(tmp == 'r'){ // 3번 고리 낙하
-            stepper_wl.moveTo(2400);
-            stepper_wr.moveTo(-2400);
+            stepper_wl.moveTo(9000);
+            stepper_wr.moveTo(-9000);
         }
         if(tmp == 'f'){ // 3번 고리 낙하
             stepper_wl.moveTo(0);
