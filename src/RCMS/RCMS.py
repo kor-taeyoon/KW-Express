@@ -30,11 +30,11 @@ except:
     exit()
 
 print('Launch waiting... 3s')
-time.sleep(1)
+#time.sleep(1)
 print('Launch waiting... 2s')
-time.sleep(1)
+#time.sleep(1)
 print('Launch waiting... 1s')
-time.sleep(1)
+#time.sleep(1)
 print('Launched !')
 
 
@@ -66,6 +66,7 @@ flag_gori_3 = 1
 velo_left = 0
 velo_right = 0
 myFont = pygame.font.SysFont("arial", 30, True, False)
+smallFont = pygame.font.SysFont("arial", 20, True, False)
 txt_velo_left = myFont.render(str(velo_left), True, (0,0,0))
 
 # Display Initialize
@@ -273,6 +274,25 @@ while run:
     screen.blit(txt_tmp, [WIN_WIDTH/2 + 90, WIN_HEIGHT/2-10])
     txt_tmp = myFont.render("S", True, (0,0,0))
     screen.blit(txt_tmp, [WIN_WIDTH/2-10, WIN_HEIGHT/2-10])
+    
+    txt_tmp = smallFont.render("R", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-267, WIN_HEIGHT-117])
+    txt_tmp = smallFont.render("F", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-267, WIN_HEIGHT-67])
+    txt_tmp = smallFont.render("T", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-167, WIN_HEIGHT-117])
+    txt_tmp = smallFont.render("G", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-167, WIN_HEIGHT-67])
+    txt_tmp = smallFont.render("Y", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-117, WIN_HEIGHT-117])
+    txt_tmp = smallFont.render("H", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-117, WIN_HEIGHT-67])
+    txt_tmp = smallFont.render("U", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-67, WIN_HEIGHT-117])
+    txt_tmp = smallFont.render("J", True, (0,0,0))
+    screen.blit(txt_tmp, [WIN_WIDTH-67, WIN_HEIGHT-67])
+
+
 
     # Refresh & Tick (FPS)
     pygame.display.update()
