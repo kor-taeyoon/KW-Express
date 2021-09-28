@@ -24,14 +24,12 @@
 #define Q_DIR_PIN          34
 #define Q_ENABLE_PIN       30
 
-#include <Arduino.h>
-#include <AccelStepper.h>
 
-AccelStepper stepper_g1(AccelStepper::DRIVER, X_STEP_PIN, X_DIR_PIN);
-AccelStepper stepper_g2(AccelStepper::DRIVER, Y_STEP_PIN, Y_DIR_PIN);
-AccelStepper stepper_g3(AccelStepper::DRIVER, Z_STEP_PIN, Z_DIR_PIN);
-AccelStepper stepper_wl(AccelStepper::DRIVER, E_STEP_PIN, E_DIR_PIN);
-AccelStepper stepper_wr(AccelStepper::DRIVER, Q_STEP_PIN, Q_DIR_PIN);
+
+#include <Arduino.h>
+
+
+AccelStepper
 
 void setup() {
     pinMode(X_STEP_PIN  , OUTPUT);
@@ -54,60 +52,40 @@ void setup() {
     pinMode(Q_DIR_PIN    , OUTPUT);
     pinMode(Q_ENABLE_PIN    , OUTPUT);
 
-
-    digitalWrite(X_ENABLE_PIN    , HIGH);
-    digitalWrite(Y_ENABLE_PIN    , HIGH);
-    digitalWrite(Z_ENABLE_PIN    , HIGH);
+    digitalWrite(X_ENABLE_PIN    , LOW);
+    digitalWrite(Y_ENABLE_PIN    , LOW);
+    digitalWrite(Z_ENABLE_PIN    , LOW);
     digitalWrite(E_ENABLE_PIN    , LOW);
     digitalWrite(Q_ENABLE_PIN    , LOW);
 
-    //digitalWrite(X_DIR_PIN    , LOW);
-    //digitalWrite(Y_DIR_PIN    , LOW);
-    //digitalWrite(Z_DIR_PIN    , LOW);
-    //digitalWrite(E_DIR_PIN    , LOW);
-    //digitalWrite(Q_DIR_PIN    , LOW);
-
-    Serial.begin(9600);
-
-    stepper_g1.setMaxSpeed(2000);
-    stepper_g1.setAcceleration(4000);
-    stepper_g2.setMaxSpeed(2000);
-    stepper_g2.setAcceleration(4000);
-    stepper_g3.setMaxSpeed(2000);
-    stepper_g3.setAcceleration(4000);
+    digitalWrite(X_DIR_PIN    , LOW);
+    digitalWrite(Y_DIR_PIN    , LOW);
+    digitalWrite(Z_DIR_PIN    , LOW);
+    digitalWrite(E_DIR_PIN    , LOW);
+    digitalWrite(Q_DIR_PIN    , LOW);
 }
 
 void loop() {
-    stepper_g1.run();
-    stepper_g2.run();
-    stepper_g3.run();
     if(Serial.available()){
         char tmp = Serial.read();
         if(tmp == 't'){ // 1번 고리 복귀
-            stepper_g1.moveTo(0);
+            
         }
         if(tmp == 'g'){ // 1번 고리 낙하
-            stepper_g1.moveTo(2400);
+
         }
         if(tmp == 'y'){ // 2번 고리 복귀
-            stepper_g2.moveTo(0);
+
         }
         if(tmp == 'h'){ // 2번 고리 낙하
-            stepper_g2.moveTo(2400);
+
         }
         if(tmp == 'u'){ // 3번 고리 복귀
-            stepper_g3.moveTo(0);
+
         }
         if(tmp == 'j'){ // 3번 고리 낙하
-            stepper_g3.moveTo(2400);
-        }
-        if(tmp == 'r'){ // 3번 고리 낙하
-            stepper_wl.moveTo(2400);
-            stepper_wr.moveTo(-2400);
-        }
-        if(tmp == 'f'){ // 3번 고리 낙하
-            stepper_wl.moveTo(0);
-            stepper_wr.moveTo(0);
+
         }
     }
+    delay(1000);
 }
