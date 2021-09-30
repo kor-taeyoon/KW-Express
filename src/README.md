@@ -1,4 +1,14 @@
-필요한 파일
+## RCMS 프로토콜 정리
+
+wasd x      -> 이동 관련 (nucleo)
+rf          -> 문 개방 동작 (ramps)
+tg yh uj    -> 고리 동작 (ramps)
+
+
+
+
+
+## 필요한 파일
 
 - rosmater, ydlidar Rviz 한번에 실행하는 스크립트 파일
 - FoxtrotGPS 한번에 실행하는 스크립트 파일

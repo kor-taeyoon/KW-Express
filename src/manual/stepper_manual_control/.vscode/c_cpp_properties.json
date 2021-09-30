@@ -10,6 +10,7 @@
             "includePath": [
                 "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/include",
                 "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/src",
+                "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/.pio/libdeps/nucleo_f767zi/AccelStepper/src",
                 "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
                 "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
                 "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
@@ -49,6 +50,7 @@
                 "path": [
                     "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/include",
                     "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/src",
+                    "C:/Users/kimtaeyoon/Documents/KW-Express/src/manual/stepper_manual_control/.pio/libdeps/nucleo_f767zi/AccelStepper/src",
                     "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
                     "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
                     "C:/Users/kimtaeyoon/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
