@@ -1,12 +1,4 @@
-발표영상 : 
-
-
-- - -
-<br>
-<br>
-<br>
-
-
+발표영상 : https://www.youtube.com/watch?v=glNhybFhy6Y
 
 # 물류시스템의 최적화를 위한 도심형 무인 운송 로봇
 
