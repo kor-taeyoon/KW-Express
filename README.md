@@ -22,9 +22,9 @@ KW-특송
 
 
 
-<br>
+![Full Design](img/Ver1.0/3D_Design.png)
 
-## 사용 부품
+
 
 
 
