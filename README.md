@@ -22,7 +22,8 @@ KW-특송
 
 
 
-![Full Design](img/Ver1.0/3D_Design.png)
+![Full Design](doc/Ver1.0/3D_Design.png)
+![Full Design](doc/Ver2.0/Structure.drawio.svg)
 
 
 
